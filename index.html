@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="shortcut icon"
+      href="https://a.radikal.ru/a01/2001/36/4a84cbf2825a.png"
+    />
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+    <title>Ajax</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="search">
+        <input
+          id="searchField"
+          class="search__field"
+          type="text"
+          value="The Matrix"
+        />
+        <div class="search__type">
+          <input type="radio" name="type" id="movie" value="movie" checked />
+          <label for="movie">Movie</label><br />
+          <input type="radio" name="type" id="series" value="series" />
+          <label for="series">Series</label><br />
+          <input type="radio" name="type" id="episode" value="episode" />
+          <label for="episode">Episode</label>
+        </div>
+        <button id="searchButton" class="search__button">Search!</button>
+      </div>
+      <div id="results" class="results"></div>
+      <div id="pagination" class="pagination"></div>
+      <div class="details" id="details"></div>
+    </div>
+    <!--SCRIPT-->
+    <script src="script.js"></script>
+  </body>
+</html>

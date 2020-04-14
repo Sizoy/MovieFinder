@@ -1,0 +1,303 @@
+* {
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  max-width: 100vw;
+  height: 100%;
+  background-color: rgba(13, 33, 77, 0.842);
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.container {
+  width: 80%;
+  height: 100%;
+  background-color: #8d85db;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.search {
+  width: 80%;
+  margin: 5% 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.search__field {
+  width: 70%;
+  height: 8vh;
+  background-color: transparent;
+  border: 2px solid white;
+  border-radius: 30px;
+  font-size: 20px;
+  padding-left: 1%;
+  outline: none;
+  color: white;
+}
+
+.search__field:focus {
+  border: 2px solid yellow;
+}
+
+.search__button {
+  background-color: transparent;
+  border: none;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+  color: white;
+}
+
+.search__button:hover {
+  cursor: pointer;
+  color: yellow;
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+  outline: none;
+  -webkit-transition: 0.1s ease-in;
+  transition: 0.1s ease-in;
+}
+
+.search__type {
+  margin: 0 2%;
+  color: white;
+  font-size: 20px;
+}
+
+.search__type input[type="radio"]:checked,
+.search__type input[type="radio"]:not(:checked) {
+  position: absolute;
+  left: -9999px;
+}
+
+.search__type input[type="radio"]:checked + label {
+  color: yellow;
+}
+
+.search__type input[type="radio"]:checked + label,
+.search__type input[type="radio"]:not(:checked) + label {
+  display: inline-block;
+  position: relative;
+  padding-left: 28px;
+  line-height: 20px;
+  cursor: pointer;
+  margin: 5% 0;
+}
+
+.search__type input[type="radio"]:checked + label:before,
+.search__type input[type="radio"]:not(:checked) + label:before {
+  content: "";
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 18px;
+  height: 18px;
+  border: 1px solid #dddddd;
+  background-color: transparent;
+  border-radius: 100%;
+}
+
+.search__type input[type="radio"]:checked + label:after {
+  content: "";
+  position: absolute;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+  left: 5px;
+  top: 5px;
+  width: 10px;
+  height: 10px;
+  border-radius: 100%;
+  background-color: yellow;
+}
+
+.results {
+  width: 90%;
+  height: auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: space-evenly;
+      -ms-flex-pack: space-evenly;
+          justify-content: space-evenly;
+}
+
+.results__item {
+  background-color: rgba(13, 33, 77, 0.842);
+  -webkit-box-shadow: -4px 6px 16px -1px rgba(0, 0, 0, 0.75);
+          box-shadow: -4px 6px 16px -1px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+  padding: 2%;
+  min-height: 300px;
+  width: 15%;
+  margin: 2% 1%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+.results__item img {
+  width: 100%;
+  height: 60%;
+}
+
+.results__title {
+  text-align: center;
+  color: white;
+  font-weight: 500;
+}
+
+.results__details {
+  font-size: 16px;
+  color: yellow;
+}
+
+.results__details:hover {
+  -webkit-transform: scale(1.1, 1.1);
+          transform: scale(1.1, 1.1);
+  -webkit-transition: 0.3s ease-in;
+  transition: 0.3s ease-in;
+  cursor: pointer;
+}
+
+.results__id {
+  display: none;
+}
+
+.pagination {
+  width: 80%;
+  height: 50px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  font-size: 18px;
+}
+
+.pagination .page {
+  width: 30px;
+  height: 30px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  margin: 1%;
+}
+
+.pagination .page:hover {
+  cursor: pointer;
+  color: white;
+}
+
+.pagination .page__active {
+  background-color: rgba(13, 33, 77, 0.842);
+  color: white;
+  border-radius: 5px;
+}
+
+.details {
+  width: 80%;
+  height: auto;
+  margin: 5% 0;
+  padding: 2%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande", "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  color: white;
+  background-color: rgba(13, 33, 77, 0.842);
+  -webkit-box-shadow: -4px 6px 16px -1px rgba(0, 0, 0, 0.75);
+          box-shadow: -4px 6px 16px -1px rgba(0, 0, 0, 0.75);
+  border-radius: 10px;
+}
+
+.details i {
+  color: yellow;
+}
+
+.details__image {
+  height: 70%;
+  width: 30%;
+}
+
+.details__image img {
+  width: 100%;
+  height: 100%;
+}
+
+.details__description {
+  width: 70%;
+  height: 70%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-left: 2%;
+}
+
+.details__title, .details__year, .details__runtime, .details__genre, .details__actors {
+  height: 20%;
+  width: 100%;
+  padding-left: 2%;
+}
+
+.details__title {
+  text-align: center;
+  font-size: 30px;
+  font-weight: 600;
+}
+
+.details__plot {
+  padding: 2%;
+  height: 30%;
+  width: 100%;
+  line-height: 1.8;
+}
+/*# sourceMappingURL=style.css.map */
