@@ -1,4 +1,4 @@
-let apiUrl = "http://www.omdbapi.com/?apikey=41e208eb";
+let apiUrl = "https://www.omdbapi.com/?apikey=41e208eb";
 $(document).ready(function () {
   $("#searchButton").click(() => SearchFilms(1));
 });
