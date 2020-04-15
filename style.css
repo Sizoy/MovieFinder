@@ -33,6 +33,12 @@ body {
   border-radius: 0px 0px 30px 30px;
 }
 
+.show {
+  display: -webkit-box !important;
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
 .search {
   width: 80%;
   margin: 5% 0;
@@ -196,9 +202,7 @@ body {
 .pagination {
   width: 80%;
   height: 50px;
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  display: none;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -251,12 +255,6 @@ body {
 
 .details i {
   color: yellow;
-}
-
-.details__show {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
 }
 
 .details__image {

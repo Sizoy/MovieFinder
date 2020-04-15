@@ -4,7 +4,8 @@ $(document).ready(function () {
   $("#searchButton").click(() => SearchFilms(1));
 });
 function SearchFilms(pageNumber) {
-  $("#details").removeClass("details__show");
+  $("#details").removeClass("show");
+  $("#pagination").removeClass("show");
   let stringPageNumber = "&page=" + pageNumber;
   let type = "&type=" + $('[type="radio"]:checked').val();
   let title = $("#searchField").val();
@@ -39,24 +40,27 @@ function SearchFilms(pageNumber) {
       }
       $("#results").html(resultHTML);
       //Пагінація
+
       let pageCount = Math.ceil(data.totalResults / 10);
       let pagination = `Pages: `;
-      for (let page = 1; page <= pageCount; page++) {
-        if (page == pageNumber) {
-          pagination += `<div class="page page__active">${page}</div>`;
-        } else {
-          pagination += `<div class="page" >${page}</div>`;
+      if (pageCount != 1) {
+        $("#pagination").addClass("show");
+        for (let page = 1; page <= pageCount; page++) {
+          if (page == pageNumber) {
+            pagination += `<div class="page page__active">${page}</div>`;
+          } else {
+            pagination += `<div class="page" >${page}</div>`;
+          }
         }
+        $("#pagination").html(pagination);
       }
-      $("#pagination").html(pagination);
-
       $("#pagination").click(function (e) {
         SearchFilms($(e.target).text());
       });
       //Детальна інформація про фільм
       $(".results__details").click((e) => {
         let id = "&i=" + $(e.currentTarget.lastElementChild).html();
-        $("#details").addClass("details__show");
+        $("#details").addClass("show");
         fetch(apiUrl + id)
           .then((idResult) => idResult.json())
           .then((idData) => {

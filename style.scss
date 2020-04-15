@@ -18,6 +18,9 @@ body {
   align-items: center;
   border-radius: 0px 0px 30px 30px;
 }
+.show {
+  display: flex !important;
+}
 .search {
   width: 80%;
   margin: 5% 0;
@@ -146,7 +149,7 @@ body {
 .pagination {
   width: 80%;
   height: 50px;
-  display: flex;
+  display: none;
   align-items: center;
   flex-wrap: wrap;
   font-size: 18px;
@@ -185,9 +188,7 @@ body {
   i {
     color: yellow;
   }
-  &__show {
-    display: flex;
-  }
+
   &__image {
     height: 70%;
     width: 30%;
