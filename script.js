@@ -1,8 +1,10 @@
 let apiUrl = "https://www.omdbapi.com/?apikey=41e208eb";
+let storage = window.sessionStorage;
 $(document).ready(function () {
   $("#searchButton").click(() => SearchFilms(1));
 });
 function SearchFilms(pageNumber) {
+  $("#details").removeClass("details__show");
   let stringPageNumber = "&page=" + pageNumber;
   let type = "&type=" + $('[type="radio"]:checked').val();
   let title = $("#searchField").val();
@@ -22,10 +24,15 @@ function SearchFilms(pageNumber) {
         resultHTML += `
         <div class="results__item">
             <div class="results__title">${data.Search[i].Title}</div>
-            
-            <div class="results__details">
-                <span>Details...</span>
-                <div class="results__id">${data.Search[i].imdbID}</div>
+            <div>
+              <div class="results__details">
+                  <span>Details...</span>
+                  <div class="results__id">${data.Search[i].imdbID}</div>
+              </div>
+              <div class="results__favorites">
+                  <span>Add to favorites</span>
+                  <div class="results__id">${data.Search[i].imdbID}</div>
+              </div>
             </div>
             <img src="${image}" alt="img">
         </div>`;
@@ -49,6 +56,7 @@ function SearchFilms(pageNumber) {
       //Детальна інформація про фільм
       $(".results__details").click((e) => {
         let id = "&i=" + $(e.currentTarget.lastElementChild).html();
+        $("#details").addClass("details__show");
         fetch(apiUrl + id)
           .then((idResult) => idResult.json())
           .then((idData) => {
@@ -68,6 +76,22 @@ function SearchFilms(pageNumber) {
                 <div class="details__plot"><i>${idData.Plot}</i></div>
             `);
           });
+      });
+      //Додати в favorites
+      $(".results__favorites").click(function (e) {
+        e.preventDefault();
+        let id = "&i=" + $(e.currentTarget.lastElementChild).html();
+        storage.setItem(id, id);
+        /*
+        for (let id in storage) {
+          fetch(apiUrl + id)
+            .then((favoriteResult) => favoriteResult.json())
+            .then((favoriteData) => {
+              //ДОПИСАТИ КОД ДЛЯ favorites
+            });
+        }
+        $("#favorites").html(htmlString);
+        */
       });
     })
     .catch(() => {
