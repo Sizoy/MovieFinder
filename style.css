@@ -168,6 +168,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -193,6 +196,7 @@ body {
 
 .results__details:hover, .results__favorites:hover {
   color: white;
+  cursor: pointer;
 }
 
 .results__id {
@@ -300,5 +304,46 @@ body {
   height: 30%;
   width: 100%;
   line-height: 1.8;
+}
+
+.favorites {
+  width: 100%;
+  display: none;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.favorites__title {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  letter-spacing: 15px;
+  font-size: 40px;
+  font-weight: 700;
+  color: #006bcf;
+}
+
+.favorites__image {
+  width: 90%;
+  height: 70%;
+}
+
+.favorites__image img {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.favorites__result {
+  background-color: #006bcf;
+  height: 550px;
+  width: 30%;
+}
+
+.favorites__result-title {
+  margin: 10% 0;
 }
 /*# sourceMappingURL=style.css.map */

@@ -1,7 +1,18 @@
 let apiUrl = "https://www.omdbapi.com/?apikey=41e208eb";
-let storage = window.sessionStorage;
+let favoritesHTML = ``;
+
 $(document).ready(function () {
+  if (localStorage.length != 0) {
+    $("#favorites-block").addClass("show");
+    favoritesHTML = localStorage.getItem("html");
+    $("#favorites").html(favoritesHTML);
+  }
   $("#searchButton").click(() => SearchFilms(1));
+  $("#searchField").keypress(function (e) {
+    if (event.keyCode == 13) {
+      SearchFilms(1);
+    }
+  });
 });
 function SearchFilms(pageNumber) {
   $("#details").removeClass("show");
@@ -39,6 +50,7 @@ function SearchFilms(pageNumber) {
         </div>`;
       }
       $("#results").html(resultHTML);
+
       //Пагінація
 
       let pageCount = Math.ceil(data.totalResults / 10);
@@ -54,51 +66,67 @@ function SearchFilms(pageNumber) {
         }
         $("#pagination").html(pagination);
       }
-      $("#pagination").click(function (e) {
-        SearchFilms($(e.target).text());
+      $("#pagination").click(function (pageButton) {
+        SearchFilms($(pageButton.target).text());
       });
       //Детальна інформація про фільм
-      $(".results__details").click((e) => {
-        let id = "&i=" + $(e.currentTarget.lastElementChild).html();
-        $("#details").addClass("show");
-        fetch(apiUrl + id)
-          .then((idResult) => idResult.json())
-          .then((idData) => {
-            image = idData.Poster;
-            if (image == "N/A") {
-              image = "img/no-poster.jpg";
-            }
-            $("#details").html(`
-                <div class="details__image"><img src="${image}" alt="img"></div>
-                <div class="details__description">
-                    <div class="details__title">${idData.Title}</div>
-                    <div class="details__year">Year: <i>${idData.Year}</i></div>
-                    <div class="details__runtime">Runtime: <i>${idData.Runtime}</i></div>
-                    <div class="details__genre">Genre: <i>${idData.Genre}</i></div>
-                    <div class="details__actors">Actors: <i>${idData.Actors}</i></div>
-                </div>
-                <div class="details__plot"><i>${idData.Plot}</i></div>
-            `);
-          });
+      $(".results__details").click((detailsButton) => {
+        ShowDetails(detailsButton);
       });
       //Додати в favorites
-      $(".results__favorites").click(function (e) {
-        e.preventDefault();
-        let id = "&i=" + $(e.currentTarget.lastElementChild).html();
-        storage.setItem(id, id);
-        /*
-        for (let id in storage) {
-          fetch(apiUrl + id)
-            .then((favoriteResult) => favoriteResult.json())
-            .then((favoriteData) => {
-              //ДОПИСАТИ КОД ДЛЯ favorites
-            });
-        }
-        $("#favorites").html(htmlString);
-        */
+      $(".results__favorites").click(function (favoritesButton) {
+        AddToFavorites(favoritesButton);
       });
     })
     .catch(() => {
       $("#results").html("Movie not found");
     });
+}
+//Детальна інформація:
+function ShowDetails(detailsButton) {
+  let id = "&i=" + $(detailsButton.currentTarget.lastElementChild).html();
+  $("#details").addClass("show");
+  fetch(apiUrl + id)
+    .then((idResult) => idResult.json())
+    .then((idData) => {
+      image = idData.Poster;
+      if (image == "N/A") {
+        image = "img/no-poster.jpg";
+      }
+      $("#details").html(`
+          <div class="details__image"><img src="${image}" alt="img"></div>
+          <div class="details__description">
+              <div class="details__title">${idData.Title}</div>
+              <div class="details__year">Year: <i>${idData.Year}</i></div>
+              <div class="details__runtime">Runtime: <i>${idData.Runtime}</i></div>
+              <div class="details__genre">Genre: <i>${idData.Genre}</i></div>
+              <div class="details__actors">Actors: <i>${idData.Actors}</i></div>
+          </div>
+          <div class="details__plot"><i>${idData.Plot}</i></div>
+      `);
+    });
+}
+//Додати в улюблене:
+function AddToFavorites(addButton) {
+  $("#favorites-block").addClass("show");
+  let id = "&i=" + $(addButton.currentTarget.lastElementChild).html();
+  if (favoritesHTML.indexOf(id) == -1) {
+    fetch(apiUrl + id)
+      .then((favoritesRequest) => favoritesRequest.json())
+      .then((favoritesData) => {
+        image = favoritesData.Poster;
+        if (image == "N/A") {
+          image = "img/no-poster.jpg";
+        }
+        favoritesHTML += `
+          <div class="favorites__result results__item ">
+              <div class="favorites__result-title results__title ">${favoritesData.Title}</div>
+              <div style="display:none">&i=${favoritesData.imdbID}</div>
+              <div class="favorites__image"><img src="${image}" alt="img"></div>
+          </div>
+          `;
+        $("#favorites").html(favoritesHTML);
+        localStorage.setItem("html", favoritesHTML);
+      });
+  }
 }
